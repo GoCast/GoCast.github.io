@@ -12,8 +12,16 @@ img.bannerimage {
     box-shadow: 20px 20px 15px black;
 }
 
-span.bannertext {
+span.bannerheading {
     text-shadow: 20px 20px 5px black;
+}
+
+p.bannertext {
+    text-shadow: 5px 5px 5px black;
+}
+
+button.bannerbutton {
+    box-shadow: 5px 5px 10px black;
 }
 
 div.span12 {
