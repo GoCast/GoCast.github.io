@@ -7,3 +7,11 @@
   font-weight: normal;
   font-style: normal;
 }
+
+img.bannerimage {
+    box-shadow: 20px 20px 15px black;
+}
+
+span.bannertext {
+    text-shadow: 20px 20px 5px black;
+}
