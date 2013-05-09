@@ -14,7 +14,7 @@ img.bannerimage {
 
 span.bannertext {
     text-shadow: 20px 20px 5px black;
-    filter: progid:DXImageTransform.Microsoft.Shadow(color=#000000,direction=45);
+    filter: progid:DXImageTransform.Microsoft.Shadow(color=#000000,direction=135,enabled=true,strength=5);
 }
 
 div.span12 {
