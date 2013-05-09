@@ -1,81 +1,42 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="GoCast It! : Group collaboration using WebRTC technologies and XMPP" />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>GoCast It!</title>
+    <meta name="description" content="GoCastPlayer: A cross-platform browser plugin for developing video chat enabled web applications." />
+    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrapcosmo.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/font-awesome.css">
+    <script type="text/javascript" src="javascripts/jquery-1.8.1.js"></script>
+    <script type="text/javascript" src="javascripts/bootstrap.js"></script>
+    <title>GoCastPlayer</title>
   </head>
-
   <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/GoCast">View on GitHub</a>
-
-          <h1 id="project_title">GoCast It!</h1>
-          <h2 id="project_tagline">Group collaboration using WebRTC technologies and XMPP</h2>
-
-        </header>
+    <div class="hero-unit" align="center" style="background-image: url('images/low_contrast_linen.png');">
+      <img src="images/gotoken.png" style="border-radius: 100px;">
+      <span style="color: lightgreen; font-family: 'GillSans'; font-size: 50px; padding-left: 1px;">castplayer</span>
+      <p style="padding-top: 10px; color: white;">A cross-platform browser plugin for developing video chat enabled web applications.</p>
+      <button class="btn btn-primary">DOWNLOAD<i class="icon-cloud-download icon-large" style="padding-left: 10px;"></i></button>
+      <button class="btn btn-warning" style="margin-left: 20px;">SOURCE<i class="icon-github icon-large" style="padding-left: 10px;"></i></button>
     </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>Welcome to GoCast</h3>
-
-<p>We are a small startup dedicated to small group collaboration and advancing the WebRTC cause. Our company splits down the line of a commercial product around collaboration and the WebRTC core for audio and video components of that collaboration inside the confines of a web browser.</p>
-
-<h2>Small Group Collaboration</h2>
-
-<p>Our small group collaboration software can be found on our main site at <a href="https://study.gocast.it/subscription.html">GoCast.it</a> where you can jump into a sample room and try it out. More information about the product can also be found at the <a href="http://www.gocast.it">company website</a>. Our product utilizes standard XMPP servers in conjunction with a good amount of <a href="http://nodejs.org">Node.JS</a> with custom XMPP clients acting in a number of roles which dictate client interaction, access controls and make bridges to the backend NoSQL databases on Amazon AWS.</p>
-
-<h2>WebRTC efforts</h2>
-
-<p>WebRTC is a great audio/video technology which is being integrated into browsers over time. Google started the <a href="http://www.webrtc.org">WebRTC</a> project and has native support for it in Chrome version 24+. Firefox is building WebRTC natively in the May/June 2013 timeframe. And Opera is working on native support as well. Other browsers may or may not support WebRTC directly. At GoCast, we had a need - a need for WebRTC support in multiple browsers on multiple platforms in a much earlier timeframe... so we built a plugin which wraps the WebRTC framework and allows us to have access to all the great WebRTC features on Windows, Mac, and Linux(*YMMV) and currently on Chrome, Firefox, Safari, and (not fully tested) IE among others who support the NSAPI plugin mechanism.</p>
-
-<p>We had an open source effort in 2012 which is now being updated here in a much more organized fashion. We have a much simpler build mechanism and we have Javascript support for seamless use of the native or plugin version of WebRTC which further simplifies your life as a would-be application developer wanting peer-to-peer video and audio real-time communications. Woo hoo!</p>
-
-<p>Want to checkout the open source plugin yourself? Go for it. <a href="mailto:info@gocast.it">Let us know</a> if you have any troubles.</p>
-
-<pre><code>$ git clone https://github.com/GoCast/webrtc_plugin.git
-$ cd webrtc_plugin
-$ 
-</code></pre>
-
-<h3>Authors and Contributors</h3>
-
-<p>The primary authors of GoCast's application and open source plugin are <a href="https://github.com/bobwolff68" class="user-mention">@bobwolff68</a> and <a href="https://github.com/manjeshbhargav" class="user-mention">@manjeshbhargav</a> with additional work efforts from <a href="https://github.com/tatewake" class="user-mention">@tatewake</a>, <a href="https://github.com/jimkoning" class="user-mention">@jimkoning</a>, <a href="https://github.com/scarrico" class="user-mention">@scarrico</a>, and <a href="https://github.com/frnz" class="user-mention">@frnz</a>.</p>
-
-<h3>Support or Contact</h3>
-
-<p>Having trouble with our open source project? Please <a href="https://github.com/GoCast/webrtc_plugin/issues">file an issue</a>. Want to contribute or ask about our commercial efforts around small group collaboration? Just <a href="mailto:info@gocast.it">contact us</a>.</p>
-      </section>
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#gocastplayer" data-toggle="tab">GoCastPlayer</a></li>
+            <li><a href="#jsapi" data-toggle="tab">JavaScript API</a></li>
+            <li><a href="#buildgcp" data-toggle="tab">Build GoCastPlayer</a></li>
+            <li><a href="#example" data-toggle="tab">Example</a></li>
+            <li><a href="#aboutus" data-toggle="tab">About Us</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="gocastplayer">gocastplayer</div>
+            <div class="tab-pane" id="jsapi">jsapi</div>
+            <div class="tab-pane" id="buildgcp">buildgcp</div>
+            <div class="tab-pane" id="example">example</div>
+            <div class="tab-pane" id="aboutus">aboutus</div>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-37964802-1");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
-
-
   </body>
 </html>
