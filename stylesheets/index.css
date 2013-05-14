@@ -27,3 +27,10 @@ button.bannerbutton {
 div.span12 {
     border: 1px solid #DDDDDD;
 }
+
+div.tabtext {
+  margin-left: 40px;
+  margin-right: 40px;
+  max-height: 150px;
+  overflow: scroll;
+}

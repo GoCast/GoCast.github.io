@@ -29,15 +29,100 @@
             <li class="active"><a href="#gocastplayer" data-toggle="tab">GoCastPlayer</a></li>
             <li><a href="#jsapi" data-toggle="tab">JavaScript API</a></li>
             <li><a href="#buildgcp" data-toggle="tab">Build GoCastPlayer</a></li>
-            <li><a href="#example" data-toggle="tab">Example</a></li>
+            <!--<li><a href="#example" data-toggle="tab">Example</a></li>-->
             <li><a href="#aboutus" data-toggle="tab">About Us</a></li>
           </ul>
           <div class="tab-content">
-            <div class="tab-pane active" id="gocastplayer">gocastplayer</div>
-            <div class="tab-pane" id="jsapi">jsapi</div>
-            <div class="tab-pane" id="buildgcp">buildgcp</div>
-            <div class="tab-pane" id="example">example</div>
-            <div class="tab-pane" id="aboutus">aboutus</div>
+            <div class="tab-pane active" id="gocastplayer">
+              <div class="well tabtext">
+                GoCastPlayer is a cross-platform browser plugin which enables web developers to design video chat enabled web apps. It’s developed using the open source Web Real-Time Communications (WebRTC) platform. GoCastPlayer provides a JavaScript API very similar to the W3C Standard PeerConnection and UserMedia APIs. On top of this, GoCastPlayer provides APIs for video effects, audio volume meter, and dynamic audio/video device selection. To find out more about WebRTC, please visit <a href="http://www.webrtc.org">webrtc.org</a>.
+              </div>
+            </div>
+            <div class="tab-pane" id="jsapi">
+              <div class="well tabtext">
+                GoCastPlayer provides a JavaScript API that mimics the W3C Standards UserMedia and PeerConnection APIs. Part of the source for GoCastPlayer is <strong>peerconnection.js</strong>, which provides a wrapper around the GoCastPlayer API. It also has the option for developers to choose whether they want to use the browser-native APIs (Chrome 25+), or go with the GoCastPlayer API. The API is explained in detail <a href="javascript:void();">here</a>.
+              </div>
+            </div>
+            <div class="tab-pane" id="buildgcp">
+              <div class="well tabtext">
+                If you want to tinker with the source and build GoCastPlayer on your own, follow these instructions:
+                <p></p>
+                <ul>
+                  <li>
+                    <strong>Mac OSX or Ubuntu</strong>
+                    <ul>
+                      <li>
+                        Clone the repository: <code>git clone https://github.com/GoCast/webrtc_plugin.git</code>
+                      </li>
+                      <li>
+                        Download the <a href="http://www.chromium.org/developers/how-tos/install-depot-tools" target="_blank">Chromium Depot Tools</a>.
+                      </li>
+                      <li>
+                        Run <code>./getdeps.sh</code> to download dependencies.
+                      </li>
+                      <li>
+                        Run <code>./prepdeps.sh Debug|Release</code> to build the webrtc library.
+                      </li>
+                      <li>
+                        Run <code>./prepplugin.sh Debug|Release</code> to build the plugin project using <a href="http://www.firebreath.org" target="_blank">Firebreath</a>.
+                      </li>
+                      <li>
+                        Run <code>./buildplugin.sh Debug|Release</code> to generate GCP.plugin (Mac) or npGCP.so (Ubuntu).
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>Windows 7+</strong>
+                    <ul>
+                      <li>
+                        Install <a href="http://msysgit.github.io">MSysGit</a>.
+                      </li>
+                      <li>
+                        Download the <a href="http://www.chromium.org/developers/how-tos/install-depot-tools" target="_blank">Chromium Depot Tools</a>.
+                      </li>
+                      <li>
+                        Set up your VS2010 development environment by following <a href="http://www.chromium.org/developers/how-tos/build-instructions-windows">these instructions</a>.
+                      </li>
+                      <li>
+                        Clone the plugin repository: <code>git clone https://github.com/GoCast/webrtc_plugin.git</code>
+                      </li>
+                      <li>
+                        Open a <strong>git-bash terminal</strong> and run <code>./getdeps.sh</code> to download dependencies.
+                      </li>
+                      <li>
+                        Go to <code>deps/libjingle/trunk</code> and run: <code>python build/gyp_chromium --depth=. third_party/webrtc/build/merge_libs.gyp</code>
+                      </li>
+                      <li>
+                        Open <code>third_party/webrtc/build/merged_lib.sln</code> in Visual Studio 2010.
+                      </li>
+                      <li>
+                        Open <code>dllentry.cpp</code> in the <code>winsdk_samples</code> project, and comment out the functions <code>DllCanUnloadNow()</code> and <code>DllGetClassObjects()</code>.
+                      </li>
+                      <li>
+                        Build the project <code>merged_lib</code>
+                      </li>
+                      <li>
+                        Open a <strong>VS2010 command prompt</strong> and run:
+                        <code>lib /out:&lt;repo_path&gt;\deps\libjingle\trunk\build\Release\webrtc.lib &lt;repo_path&gt;\deps\libjingle\trunk\build\Release\lib\*.lib</code>
+                      </li>
+                      <li>
+                        Open a <strong>Windows command prompt</strong>, go to the repository folder and run: <code>deps\firebreath\prepcmd2010.exe src\js_api\projects build</code>
+                      </li>
+                      <li>
+                        Open <code>build\Firebreath.sln</code> and build the project <code>GCPWixInstall</code>. The plugin install file will be <code>build\bin\GCP\Debug|Release\GCP.exe</code>.
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!--<div class="tab-pane" id="example">example</div>-->
+            <div class="tab-pane" id="aboutus">
+              <div class="well tabtext">
+                At <a href="http://www.gocast.it">GoCast.it Inc.</a>, our vision is to develop quality web-based online collaboration tools for small groups/teams. We are using GoCastPlayer to enable video chat in our collaboration web app. You can check it out <a href="https://study.gocast.it/subscription.html">here</a>.
+                Authors: Robert Wolff (CTO) - short bio Manjesh Malavalli (Software Engineer) - short bio
+              </div>
+            </div>
           </div>
         </div>
       </div>
