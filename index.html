@@ -4,11 +4,11 @@
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <meta name="description" content="GoCastPlayer: A cross-platform browser plugin for developing video chat enabled web applications." />
-    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrapcosmo.min.css?1368567880">
-    <link rel="stylesheet" type="text/css" href="stylesheets/font-awesome.css?1368567880">
-    <link rel="stylesheet" type="text/css" href="stylesheets/index.css?1368567880">
-    <script type="text/javascript" src="javascripts/jquery-1.8.1.min.js?1368567880"></script>
-    <script type="text/javascript" src="javascripts/bootstrap.min.js?1368567880"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrapcosmo.min.css?1368574764">
+    <link rel="stylesheet" type="text/css" href="stylesheets/font-awesome.css?1368574764">
+    <link rel="stylesheet" type="text/css" href="stylesheets/index.css?1368574764">
+    <script type="text/javascript" src="javascripts/jquery-1.8.1.min.js?1368574764"></script>
+    <script type="text/javascript" src="javascripts/bootstrap.min.js?1368574764"></script>
     <title>GoCastPlayer</title>
   </head>
   <body>
@@ -18,8 +18,8 @@
         <span class="bannerheading" style="color: lightgreen; font-family: 'GillSans'; font-size: 50px; padding-left: 1px;">castplayer</span>
         <p></p>
         <p class="bannertext" style="padding-top: 10px; color: white;">A cross-platform browser plugin for developing video chat enabled web applications.</p>
-        <button class="btn btn-primary bannerbutton">DOWNLOAD<i class="icon-cloud-download icon-large" style="padding-left: 10px;"></i></button>
-        <button class="btn btn-warning bannerbutton" style="margin-left: 20px;">SOURCE<i class="icon-github icon-large" style="padding-left: 10px;"></i></button>
+        <a class="btn btn-primary bannerbutton" href="javascript:void(0);">DOWNLOAD<i class="icon-cloud-download icon-large" style="padding-left: 10px;"></i></a>
+        <a class="btn btn-warning bannerbutton" style="margin-left: 20px;" href="https://github.com/GoCast/webrtc_plugin" target="_blank">SOURCE<i class="icon-github icon-large" style="padding-left: 10px;"></i></a>
       </div>
     </div>
     <div class="container">
@@ -127,5 +127,16 @@
         </div>
       </div>
     </div>
+    <script type="text/javascript">
+      (function() {
+        var ismac = /mac/.test(navigator.userAgent.toLowerCase()),
+            iswin = /win/.test(navigator.userAgent.toLowerCase());
+        if (ismac) {
+          $('.bannerbutton.btn-primary').attr('href', 'downloads/GoCastPlayer.pkg');
+        } else if (iswin) {
+          $('.bannerbutton.btn-primary').attr('href', 'downloads/GoCastPlayer.msi');
+        }
+      }());
+    </script>
   </body>
 </html>
