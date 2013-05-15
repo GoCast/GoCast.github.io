@@ -20,7 +20,7 @@ p.bannertext {
     text-shadow: 5px 5px 5px black;
 }
 
-button.bannerbutton {
+a.bannerbutton {
     box-shadow: 5px 5px 10px black;
 }
 
