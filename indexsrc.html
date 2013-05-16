@@ -136,9 +136,9 @@
       (function() {
         var buttonHtml = 'DOWNLOAD {{ostype}}-BIT<i class="icon-cloud-download icon-large" ' +
                          'style="padding-left: 10px;"></i>',
-            ismac = false,///mac/.test(navigator.userAgent.toLowerCase()),
+            ismac = /mac/.test(navigator.userAgent.toLowerCase()),
             iswin = /win/.test(navigator.userAgent.toLowerCase()),
-            islnx = true;///linux/.test(navigator.userAgent.toLowerCase());
+            islnx = /linux/.test(navigator.userAgent.toLowerCase());
         if (ismac) {
           $('.bannerbutton.btn-primary').attr('href', 'downloads/GoCastPlayer.pkg');
         } else if (iswin) {
