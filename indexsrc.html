@@ -147,7 +147,7 @@
           $('.bannerbutton.btn-primary').attr('href', 'downloads/GoCastPlayer_i686.tar.gz')
                                         .html(buttonHtml.replace(/\{\{ostype\}\}/, '32'));
           $('.bannerbutton.btn-primary').clone().attr('href', 'downloads/GoCastPlayer_x86_64.tar.gz')
-                                        .html(buttonHtml.replace(/\{\{ostype\}\}/, '32'))
+                                        .html(buttonHtml.replace(/\{\{ostype\}\}/, '64'))
                                         .insertAfter('.bannerbutton.btn-primary')
                                         .css('margin-left', '20px');
         }
