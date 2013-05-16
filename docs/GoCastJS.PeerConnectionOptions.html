@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: PeerConnectionOptions</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Class: PeerConnectionOptions</h1>
+    
+    
+
+
+
+<section>
+    
+<header>
+    <h2>
+        <span class="ancestors"><a href="GoCastJS.html">GoCastJS</a>.</span>
+    
+    PeerConnectionOptions
+    </h2>
+    
+</header>  
+
+<article>
+    <div class="container-overview">
+    
+    
+    
+        
+<dt>
+    <h4 class="name" id="PeerConnectionOptions"><span class="type-signature"></span>new PeerConnectionOptions<span class="signature">(apitype)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Config options for peerconnection.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>apitype</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">'gcp' or 'native'.</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+        <h5 class="subsection-title">Properties:</h5>
+        
+        <dl>
+
+<table class="props">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>player</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">DomElement</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">GoCastPlayer instance (apitype == 'gcp') or video element (apitype == 'native') used for remote media.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>pcid</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Unique identifier of peerconnection.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>iceServers</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">[({uri: 'stun|turn:domain:port', (password: pwd)?},)*]</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>onIceMessage</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">function(candidate) {}, called when a new local ice candidate is generated.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>onAddStream</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">function(stream) {}, called when a remote stream is added.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>onRemoveStream</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">function(stream) {}, called when a remote stream is removed.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>onSignalingStateChange</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">function(newState) {}, called when peerconnection's signaling state changes.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>onConnStateChange</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">function(newState) {}, called when peerconnection's connection state changes.</td>
+        </tr>
+	
+	
+	</tbody>
+</table></dl>
+        
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="peerconnection.js.html">peerconnection.js</a>, <a href="peerconnection.js.html#line465">line 465</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</article>
+
+</section>  
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="GoCastJS.Exception.html">Exception</a></li><li><a href="GoCastJS.PeerConnection.html">PeerConnection</a></li><li><a href="GoCastJS.PeerConnectionOptions.html">PeerConnectionOptions</a></li><li><a href="GoCastJS.UserMediaOptions.html">UserMediaOptions</a></li></ul><h3>Namespaces</h3><ul><li><a href="GoCastJS.html">GoCastJS</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Thu May 16 2013 09:54:52 GMT-0700 (PDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
