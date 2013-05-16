@@ -38,3 +38,9 @@ iframe {
   width: 100%;
   height: 500px;
 }
+
+label {
+  display: inline;
+  color: seagreen;
+  text-decoration: underline;
+}
