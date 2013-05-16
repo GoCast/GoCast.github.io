@@ -41,5 +41,9 @@ iframe {
 
 label {
   display: inline;
-  color: seagreen;
+}
+
+p.jobtitle {
+  font-family: 'Times New Roman';
+  font-style: italic;
 }

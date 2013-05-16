@@ -122,10 +122,11 @@
             </div>
             <!--<div class="tab-pane" id="example">example</div>-->
             <div class="tab-pane" id="aboutus">
-              <div class="well tabtext" style="height: 300px;">
-                At <a href="http://www.gocast.it" target="_blank">GoCast.it Inc.</a>, our vision is to develop quality web-based online collaboration tools for small groups/teams. We are using GoCastPlayer to enable video chat in our collaboration web app. You can check it out <a href="https://study.gocast.it/subscription.html" target="_blank">here</a>. The Team has included: Stuart Gannes, Jeff Vadasz, Andy Ku, Sandra Carrico, TJ Grant, and Franz Pereira.<p></p>
-                Authors 
-                Authors: <label id="rwolff">Robert Wolff (CTO)</label> and <label id="mmalavalli">Manjesh Malavalli (Software Engineer)</label>
+              <div class="well tabtext">
+                At <a href="http://www.gocast.it" target="_blank">GoCast.it Inc.</a>, our vision is to develop quality web-based online collaboration tools for small groups/teams. We are using GoCastPlayer to enable video chat in our collaboration web app. You can check it out <a href="https://study.gocast.it/subscription.html" target="_blank">here</a>. The Team has included: Stuart Gannes, Jeff Vadasz, Andy Ku, Sandra Carrico, TJ Grant, and Franz Pereira.<p></p><p></p><p></p>
+                <strong>Project Authors</strong><br/><p></p>
+                <label id="rwolff" class="badge badge-success" align="center">Robert Wolff</label><br/>
+                <label id="mmalavalli" class="badge badge-success" align="center">Manjesh Malavalli</label>
               </div>
             </div>
           </div>
@@ -153,24 +154,44 @@
         }
 
         $('label#rwolff').hovercard({
-          detailsHTML: '<p></p><p>Robert brings a long history in multimedia, streaming, internet, ' +
+          detailsHTML: '<p></p><p class="jobtitle">Chief Technology Officer, GoCast.it Inc.</p>' +
+                       '<p>Robert brings a long history in multimedia, streaming, internet, ' +
                        'and broadcast technologies ranging from early HDTV, DirecTV, settop boxes, ' +
                        'DVD decoding and encoding as well as streaming technologies, cryptography, ' +
                        'and network infrastructure work to the GoCast family. As a technology ' +
                        'centric CTO, he is very involved in the day-to-day engineering work as ' +
                        'well as the vision and outword facing work at GoCast.</p>',
           width: 500,
-          autoAdjust: false
+          autoAdjust: false,
+          onHoverIn: function() {
+            $('label#rwolff').removeClass('badge-success')
+                             .addClass('badge-inverse');
+            $('div.tab-pane#aboutus > div.tabtext').css('height', '300px');
+          },
+          onHoverOut: function() {
+            $('label#rwolff').addClass('badge-success')
+                             .removeClass('badge-inverse');
+          }
         });
         $('label#mmalavalli').hovercard({
-          detailsHTML: '<p></p><p>Manjesh has been involved with media streaming and video processing ' +
+          detailsHTML: '<p></p><p class="jobtitle">Software Engineer, GoCast.it Inc.</p>' +
+                       '<p>Manjesh has been involved with media streaming and video processing ' +
                        'for more than five years. He has also been involved in UI development in the ' +
                        'last two years. He brings to the GoCast family his considerable skills in ' +
                        'software design and development. His background in video processing/compression ' +
                        'has helped him master the inner workings of the WebRTC open source relatively ' +
                        'quickly, thereby shortening our development cycle.</p>',
           width: 500,
-          autoAdjust: false
+          autoAdjust: false,
+          onHoverIn: function() {
+            $('label#mmalavalli').removeClass('badge-success')
+                                 .addClass('badge-inverse');
+            $('div.tab-pane#aboutus > div.tabtext').css('height', '300px');
+          },
+          onHoverOut: function() {
+            $('label#mmalavalli').addClass('badge-success')
+                                 .removeClass('badge-inverse');
+          }
         });
       }());
     </script>
