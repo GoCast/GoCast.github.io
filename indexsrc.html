@@ -4,6 +4,7 @@
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <meta name="description" content="GoCastPlayer: A cross-platform browser plugin for developing video chat enabled web applications." />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="stylesheets/bootstrapcosmo.min.css?GOCASTTIMESTAMP">
     <link rel="stylesheet" type="text/css" href="stylesheets/font-awesome.css?GOCASTTIMESTAMP">
     <link rel="stylesheet" type="text/css" href="stylesheets/index.css?GOCASTTIMESTAMP">
@@ -121,7 +122,7 @@
             </div>
             <!--<div class="tab-pane" id="example">example</div>-->
             <div class="tab-pane" id="aboutus">
-              <div class="well tabtext" style="height: 400px;">
+              <div class="well tabtext" style="height: 300px;">
                 At <a href="http://www.gocast.it" target="_blank">GoCast.it Inc.</a>, our vision is to develop quality web-based online collaboration tools for small groups/teams. We are using GoCastPlayer to enable video chat in our collaboration web app. You can check it out <a href="https://study.gocast.it/subscription.html" target="_blank">here</a>. The Team has included: Stuart Gannes, Jeff Vadasz, Andy Ku, Sandra Carrico, TJ Grant, and Franz Pereira.<p></p>
                 Authors 
                 Authors: <label id="rwolff">Robert Wolff (CTO)</label> and <label id="mmalavalli">Manjesh Malavalli (Software Engineer)</label>
@@ -133,13 +134,20 @@
     </div>
     <script type="text/javascript">
       (function() {
-        var ismac = /mac/.test(navigator.userAgent.toLowerCase()),
-            iswin = /win/.test(navigator.userAgent.toLowerCase());
+        var ismac = false;///mac/.test(navigator.userAgent.toLowerCase()),
+            iswin = /win/.test(navigator.userAgent.toLowerCase()),
+            islnx = true;///linux/.test(navigator.userAgent.toLowerCase());
         if (ismac) {
           $('.bannerbutton.btn-primary').attr('href', 'downloads/GoCastPlayer.pkg');
         } else if (iswin) {
           $('.bannerbutton.btn-primary').attr('href', 'downloads/GoCastPlayer.msi');
+        } else if (islnx) {
+          $('.bannerbutton.btn-primary').attr('href', 'downloads/GoCastPlayer_i686.tar.gz')
+                                        .text('DOWNLOAD 32-BIT');
+          $('.bannerbutton.btn-primary').clone().attr('href', 'downloads/GoCastPlayer_x86_64.tar.gz')
+                                        .text('DOWNLOAD 64-BIT').insertAfter('.bannerbutton.btn-primary');
         }
+
         $('label#rwolff').hovercard({
           detailsHTML: '<p></p><p>Robert brings a long history in multimedia, streaming, internet, ' +
                        'and broadcast technologies ranging from early HDTV, DirecTV, settop boxes, ' +
