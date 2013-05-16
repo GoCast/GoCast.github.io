@@ -134,7 +134,9 @@
     </div>
     <script type="text/javascript">
       (function() {
-        var ismac = false,///mac/.test(navigator.userAgent.toLowerCase()),
+        var buttonHtml = 'DOWNLOAD {{ostype}}-BIT<i class="icon-cloud-download icon-large" ' +
+                         'style="padding-left: 10px;"></i>',
+            ismac = false,///mac/.test(navigator.userAgent.toLowerCase()),
             iswin = /win/.test(navigator.userAgent.toLowerCase()),
             islnx = true;///linux/.test(navigator.userAgent.toLowerCase());
         if (ismac) {
@@ -143,9 +145,11 @@
           $('.bannerbutton.btn-primary').attr('href', 'downloads/GoCastPlayer.msi');
         } else if (islnx) {
           $('.bannerbutton.btn-primary').attr('href', 'downloads/GoCastPlayer_i686.tar.gz')
-                                        .text('DOWNLOAD 32-BIT');
+                                        .html(buttonHtml.replace(/\{\{ostype\}\}/, '32'));
           $('.bannerbutton.btn-primary').clone().attr('href', 'downloads/GoCastPlayer_x86_64.tar.gz')
-                                        .text('DOWNLOAD 64-BIT').insertAfter('.bannerbutton.btn-primary');
+                                        .html(buttonHtml.replace(/\{\{ostype\}\}/, '32'))
+                                        .insertAfter('.bannerbutton.btn-primary')
+                                        .css('margin-left', '20px');
         }
 
         $('label#rwolff').hovercard({
