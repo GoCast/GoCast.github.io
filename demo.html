@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="GoCastPlayer: A cross-platform browser plugin for developing video chat enabled web applications." />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrapcosmo.min.css?1368833250">
+    <link rel="stylesheet" type="text/css" href="stylesheets/font-awesome.css?1368833250">
+    <link rel="stylesheet" type="text/css" href="stylesheets/demo.css?1368833250">
+    <script type="text/javascript" src="javascripts/jquery-1.8.1.min.js?1368833250"></script>
+    <script type="text/javascript" src="javascripts/bootstrap.min.js?1368833250"></script>
+    <script type="text/javascript" src="https://raw.github.com/GoCast/webrtc_plugin/develop/peerconnection.js?1368833250"></script>
+    <title>GoCastPlayer Demo</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span12 alert alert-winmetro">
+          <h2>gocastplayer demo</h2>
+          <p></p>
+          <div class="span4 offset1 alert alert-success video local">
+            <p align="center" style="width: 320px;">local view</p>
+          </div>
+          <div class="span4 alert video remote">
+            <p align="center" style="width: 320px;">remote view</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      var localplayerloaded = function() {
+        var apitype = /\?native$/.test(window.location.href) ? 'native' : 'gcp',
+            localVideo = $('.localVideo').get(0),
+            remoteVideo = $('.remoteVideo').get(0),
+            constraints = {
+              audio: true,
+              video: true,
+              videoconstraints: {
+                webrtc: {
+                  mandatory: {
+                    minWidth: '320',
+                    minHeight: '240',
+                    maxWidth: '320',
+                    maxHeight: '240'
+                  }
+                }
+              }
+            };
+
+        GoCastJS.getUserMedia(
+          new GoCastJS.UserMediaOptions(constraints, localVideo, apitype),
+          function(stream) {
+            var pc = null,
+                pcopts = new GoCastJS.PeerConnectionOptions(
+                  remoteVideo, 'remoteVideo',
+                  [{uri: 'stun:stun.l.google.com:19302'}],
+                  function(candidate) {
+                    pc.AddIceCandidate(candidate);
+                  },
+                  function(stream) {},
+                  function(stream) {},
+                  function(newState) {},
+                  function(newState) {},
+                  apitype
+                ),
+                onnegneeded = function() {
+                  pc.CreateOffer(function(sdp) {
+                    pc.SetLocalDescription('offer', sdp, function() {
+                      pc.SetRemoteDescription('answer', sdp, function() {}, function(err) {
+                        alert('Failed to set remote sdp: ' + err);
+                      });
+                    }, function(err) {
+                      alert('Failed to set local sdp: ' + err);
+                    });
+                  }, function(err) {
+                    alert('Failed to create offer sdp: ' + err);
+                  }, {
+                    sdpconstraints: {
+                      mandatory: {
+                        OfferToReceiveAudio: 'true',
+                        OfferToReceiveVideo: 'true'
+                      }
+                    }
+                  });
+                };
+
+            pc = new GoCastJS.PeerConnection(pcopts);
+            pc.AddStream(stream, onnegneeded);
+          },
+          function(err) {
+            alert('Couldn\'t obtain user media: ' + err);
+          }
+        );
+      };
+
+      $(document).ready(function() {
+        var apitype = /\?native$/.test(window.location.href) ? 'native' : 'gcp',
+            videotmpls = {
+              gcp: '<object class="{{id}}" type="application/x-gocastplayer" width="{{width}}" height="{{height}}"></object>',
+              native: '<video class="{{id}}" width="{{width}}" height="{{height}}" autoplay></video>'
+            },
+            rendertmpl = function(tmpl, params) {
+              var rtmpl = tmpl;
+              for (var i in params) {
+                if (params.hasOwnProperty(i)) {
+                  rtmpl = rtmpl.replace('{{' + i + '}}', params[i]);
+                }
+              }
+              return rtmpl;
+            },
+            vtmpl = videotmpls[apitype];
+
+        $(rendertmpl(vtmpl, {
+          id: 'remoteVideo',
+          width: '320',
+          height: '240'
+        })).insertBefore('.video.remote > p');
+
+        if ('gcp' === apitype) {
+          vtmpl = vtmpl.replace(/></, '><param name="onload" value="{{onload}}"></param><');
+          $(rendertmpl(vtmpl, {
+            id: 'localVideo',
+            width: '320',
+            height: '240',
+            onload: 'localplayerloaded'
+          })).insertBefore('.video.local > p');
+        } else {
+          $(rendertmpl(vtmpl, {
+            id: 'localVideo',
+            width: '320',
+            height: '240'
+          })).insertBefore('.video.local > p');
+        }
+      });
+    </script>
+  </body>
+</html>
