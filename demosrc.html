@@ -119,7 +119,7 @@
 
         if ('gcp' === apitype) {
           vtmpl = vtmpl.replace(/></, '><param name="onload" value="{{onload}}"></param><');
-          $('div.alert-winmetro > h2').text('gocastplayer demo (GoCastPlayer WebRTC API)');
+          $('div.alert-winmetro > h2').text('gocastplayer demo (plugin)');
           $(rendertmpl(vtmpl, {
             id: 'localVideo',
             width: '320',
@@ -127,7 +127,7 @@
             onload: 'localplayerloaded'
           })).insertBefore('.video.local > p');
         } else {
-          $('div.alert-winmetro > h2').text('gocastplayer demo (Browser-Native WebRTC API)');
+          $('div.alert-winmetro > h2').text('gocastplayer demo (html5)');
           $(rendertmpl(vtmpl, {
             id: 'localVideo',
             width: '320',

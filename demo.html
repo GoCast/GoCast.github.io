@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <meta name="description" content="GoCastPlayer: A cross-platform browser plugin for developing video chat enabled web applications." />
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrapcosmo.min.css?1368835069">
-    <link rel="stylesheet" type="text/css" href="stylesheets/font-awesome.css?1368835069">
-    <link rel="stylesheet" type="text/css" href="stylesheets/demo.css?1368835069">
-    <script type="text/javascript" src="javascripts/jquery-1.8.1.min.js?1368835069"></script>
-    <script type="text/javascript" src="javascripts/bootstrap.min.js?1368835069"></script>
-    <script type="text/javascript" src="https://raw.github.com/GoCast/webrtc_plugin/develop/peerconnection.js?1368835069"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrapcosmo.min.css?1368835349">
+    <link rel="stylesheet" type="text/css" href="stylesheets/font-awesome.css?1368835349">
+    <link rel="stylesheet" type="text/css" href="stylesheets/demo.css?1368835349">
+    <script type="text/javascript" src="javascripts/jquery-1.8.1.min.js?1368835349"></script>
+    <script type="text/javascript" src="javascripts/bootstrap.min.js?1368835349"></script>
+    <script type="text/javascript" src="https://raw.github.com/GoCast/webrtc_plugin/develop/peerconnection.js?1368835349"></script>
     <title>GoCastPlayer Demo</title>
   </head>
   <body>
@@ -119,7 +119,7 @@
 
         if ('gcp' === apitype) {
           vtmpl = vtmpl.replace(/></, '><param name="onload" value="{{onload}}"></param><');
-          $('div.alert-winmetro > h2').text('gocastplayer demo (GoCastPlayer WebRTC API)');
+          $('div.alert-winmetro > h2').text('gocastplayer demo (plugin)');
           $(rendertmpl(vtmpl, {
             id: 'localVideo',
             width: '320',
@@ -127,7 +127,7 @@
             onload: 'localplayerloaded'
           })).insertBefore('.video.local > p');
         } else {
-          $('div.alert-winmetro > h2').text('gocastplayer demo (Browser-Native WebRTC API)');
+          $('div.alert-winmetro > h2').text('gocastplayer demo (html5)');
           $(rendertmpl(vtmpl, {
             id: 'localVideo',
             width: '320',
