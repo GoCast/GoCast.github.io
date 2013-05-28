@@ -60,7 +60,7 @@
                     console.log('ONICE-SIGSTATE: ' + pc.sigState);
                     pc.AddIceCandidate(candidate);
                   },
-                  function(stream) {},
+                  function(stream) { console.log('ONADDSTREAM: ' + stream)},
                   function(stream) {},
                   function(newState) { console.log('SIGSTATE: ' + newState); },
                   function(newState) { console.log('CONNSTATE: ' + newState); },

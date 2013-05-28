@@ -576,7 +576,7 @@ GoCastJS.PeerConnection = function(options) {
     if ('native' === apitype) {
         this.peerconn.onstatechange = function() {
             if(self.peerconn) {
-                if (26 === parseInt($.browser.version)) {
+                if (26 <= parseInt($.browser.version)) {
                     onstatechange(self.peerconn.signalingState);
                 } else {
                     onstatechange(self.peerconn.readyState);
@@ -619,7 +619,7 @@ GoCastJS.PeerConnection = function(options) {
     if ('native' === apitype) {
         this.peerconn.onicechange = function() {
             if (self.peerconn) {
-                if (26 === parseInt($.browser.version)) {
+                if (26 <= parseInt($.browser.version)) {
                     onicechange(self.peerconn.iceConnectionState);
                 } else {
                     onicechange(self.peerconn.iceState);
