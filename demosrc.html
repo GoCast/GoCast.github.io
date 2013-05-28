@@ -56,12 +56,14 @@
                   remoteVideo, 'remoteVideo',
                   [{uri: 'stun:stun.l.google.com:19302'}],
                   function(candidate) {
+                    console.log('ONICE: ' + candidate);
+                    console.log('ONICE-SIGSTATE: ' + pc.sigState);
                     pc.AddIceCandidate(candidate);
                   },
                   function(stream) {},
                   function(stream) {},
-                  function(newState) {},
-                  function(newState) {},
+                  function(newState) { console.log('SIGSTATE: ' + newState); },
+                  function(newState) { console.log('CONNSTATE: ' + newState); },
                   apitype
                 ),
                 onnegneeded = function() {
