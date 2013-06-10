@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <meta name="description" content="GoCastPlayer: A cross-platform browser plugin for developing video chat enabled web applications." />
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrapcosmo.min.css?1369753981">
-    <link rel="stylesheet" type="text/css" href="stylesheets/font-awesome.css?1369753981">
-    <link rel="stylesheet" type="text/css" href="stylesheets/demo.css?1369753981">
-    <script type="text/javascript" src="javascripts/jquery-1.8.1.min.js?1369753981"></script>
-    <script type="text/javascript" src="javascripts/bootstrap.min.js?1369753981"></script>
-    <script type="text/javascript" src="javascripts/peerconnection.js?1369753981"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrapcosmo.min.css?1370875019">
+    <link rel="stylesheet" type="text/css" href="stylesheets/font-awesome.css?1370875019">
+    <link rel="stylesheet" type="text/css" href="stylesheets/demo.css?1370875019">
+    <script type="text/javascript" src="javascripts/jquery-1.8.1.min.js?1370875019"></script>
+    <script type="text/javascript" src="javascripts/bootstrap.min.js?1370875019"></script>
+    <script type="text/javascript" src="javascripts/peerconnection.js?1370875019"></script>
     <title>GoCastPlayer Demo</title>
   </head>
   <body>
@@ -29,7 +29,8 @@
       </div>
     </div>
     <script type="text/javascript">
-      var localplayerloaded = function() {
+      var pc = null,
+      localplayerloaded = function() {
         var apitype = /\?native$/.test(window.location.href) ? 'native' : 'gcp',
             localVideo = $('.localVideo').get(0),
             remoteVideo = $('.remoteVideo').get(0),
@@ -51,8 +52,7 @@
         GoCastJS.getUserMedia(
           new GoCastJS.UserMediaOptions(constraints, localVideo, apitype),
           function(stream) {
-            var pc = null,
-                pcopts = new GoCastJS.PeerConnectionOptions(
+            var pcopts = new GoCastJS.PeerConnectionOptions(
                   remoteVideo, 'remoteVideo',
                   [{uri: 'stun:stun.l.google.com:19302'}],
                   function(candidate) {
