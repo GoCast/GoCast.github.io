@@ -906,6 +906,11 @@ GoCastJS.PeerConnection.prototype.Height = function(height) {
     return this.player.height;
 };
 
+/**
+ * Get peerconnection network statistics.
+ * @memberof GoCastJS.PeerConnection
+ * @param {Function} onstats - function(stats) {} - callback with stats array.
+ */
 GoCastJS.PeerConnection.prototype.GetStats = function(onstats) {
     var dumpstats = function(statobj) {
             var ret = {}, statnames;

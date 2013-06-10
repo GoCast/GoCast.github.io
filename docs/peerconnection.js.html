@@ -601,15 +601,23 @@ GoCastJS.PeerConnection = function(options) {
     };
 
     if ('native' === apitype) {
-        this.peerconn.onstatechange = function() {
-            if(self.peerconn) {
-                if (26 === parseInt($.browser.version)) {
+        if (27 &lt;= parseInt($.browser.version)) {
+            this.peerconn.onsignalingstatechange = function() {
+                if(self.peerconn) {
                     onstatechange(self.peerconn.signalingState);
-                } else {
-                    onstatechange(self.peerconn.readyState);
                 }
-            }
-        };
+            };
+        } else {
+            this.peerconn.onstatechange = function() {
+                if(self.peerconn) {
+                    if (26 === parseInt($.browser.version)) {
+                        onstatechange(self.peerconn.signalingState);
+                    } else {
+                        onstatechange(self.peerconn.readyState);
+                    }
+                }
+            };
+        }
     } else if ('gcp' === apitype) {
         this.player.onstatechange = onstatechange;
     }
@@ -644,15 +652,23 @@ GoCastJS.PeerConnection = function(options) {
     };
 
     if ('native' === apitype) {
-        this.peerconn.onicechange = function() {
-            if (self.peerconn) {
-                if (26 === parseInt($.browser.version)) {
+        if (27 &lt;= parseInt($.browser.version)) {
+            this.peerconn.oniceconnectionstatechange = function() {
+                if (self.peerconn) {
                     onicechange(self.peerconn.iceConnectionState);
-                } else {
-                    onicechange(self.peerconn.iceState);
                 }
-            }
-        };
+            };
+        } else {
+            this.peerconn.onicechange = function() {
+                if (self.peerconn) {
+                    if (26 === parseInt($.browser.version)) {
+                        onicechange(self.peerconn.iceConnectionState);
+                    } else {
+                        onicechange(self.peerconn.iceState);
+                    }
+                }
+            };
+        }
     } else if ('gcp' === apitype) {
         this.player.onicechange = onicechange;
     }
@@ -726,16 +742,26 @@ GoCastJS.PeerConnection.prototype.RemoveStream = function(stream, negotiationCal
  * @param {Object} constraints - {sdpconstraints: {mandatory: {OfferToReceiveAudio: 'true|false', OfferToReceiveVideo: 'true|false'}}}
  */
 GoCastJS.PeerConnection.prototype.CreateOffer = function(success, failure, constraints) {
+    var acodec = constraints.sdpconstraints.mandatory.AudioCodec;
+
     success = success || function(sdp) {};
     failure = failure || function(error) {};
 
     if ('gcp' === this.apitype) {
         this.player.createOffer(success, failure, constraints || {});
     } else if ('native' === this.apitype) {
+        delete constraints.sdpconstraints.mandatory.AudioCodec;
         this.peerconn.createOffer(function(sdp) {
-            success(sdp.sdp);
+            if ('opus' === acodec) {
+                success(sdp.sdp.replace(/a=rtpmap:[0-9]+\s(ISAC|PCMU|PCMA|CN|telephone\-event)\/[0-9]+\r\n/g, ''));
+            } else if ('ISAC' === acodec) {
+                success(sdp.sdp.replace(/a=rtpmap:[0-9]+\s(opus|PCMU|PCMA|CN|telephone\-event)\/[0-9]+(\/[0-9]+)?\r\n/g, '')
+                               .replace(/a=fmtp:[0-9]+\sminptime=[0-9]+\r\n/g, ''));
+            } else {
+                success(sdp.sdp);
+            }
         }, function() {
-            failure('setLocalDescription failed.');
+            failure('CreateOffer() failed.');
         }, constraints.sdpconstraints);
     }
 };
@@ -748,16 +774,26 @@ GoCastJS.PeerConnection.prototype.CreateOffer = function(success, failure, const
  * @param {Object} constraints - {sdpconstraints: {mandatory: {OfferToReceiveAudio: 'true|false', OfferToReceiveVideo: 'true|false'}}}
  */
 GoCastJS.PeerConnection.prototype.CreateAnswer = function(success, failure, constraints) {
+    var acodec = constraints.sdpconstraints.mandatory.AudioCodec;
+
     success = success || function(sdp) {};
     failure = failure || function(error) {};
 
     if ('gcp' === this.apitype) {
         this.player.createAnswer(success, failure, constraints || {});
     } else if ('native' === this.apitype) {
+        delete constraints.sdpconstraints.mandatory.AudioCodec;
         this.peerconn.createAnswer(function(sdp) {
-            success(sdp.sdp);
+            if ('opus' === acodec) {
+                success(sdp.sdp.replace(/a=rtpmap:[0-9]+\s(ISAC|PCMU|PCMA|CN|telephone\-event)\/[0-9]+\r\n/g, ''));
+            } else if ('ISAC' === acodec) {
+                success(sdp.sdp.replace(/a=rtpmap:[0-9]+\s(opus|PCMU|PCMA|CN|telephone\-event)\/[0-9]+(\/[0-9]+)?\r\n/g, '')
+                               .replace(/a=fmtp:[0-9]+\sminptime=[0-9]+\r\n/g, ''));
+            } else {
+                success(sdp.sdp);
+            }
         }, function() {
-            failure('setLocalDescription failed.');
+            failure('CreateAnswer() failed.');
         }, constraints.sdpconstraints);
     }
 };
@@ -898,6 +934,66 @@ GoCastJS.PeerConnection.prototype.Height = function(height) {
 };
 
 /**
+ * Get peerconnection network statistics.
+ * @memberof GoCastJS.PeerConnection
+ * @param {Function} onstats - function(stats) {} - callback with stats array.
+ */
+GoCastJS.PeerConnection.prototype.GetStats = function(onstats) {
+    var dumpstats = function(statobj) {
+            var ret = {}, statnames;
+
+            if (statobj.id) {
+                ret.id = statobj.id;
+            }
+            if (statobj.type) {
+                ret.type = statobj.type;
+            }
+            if (statobj.timestamp) {
+                ret.timestamp = statobj.timestamp;
+            }
+            if (statobj.names) {
+                statnames = statobj.names();
+                for (var i=0; i&lt;statnames.length; i++) {
+                    ret[statnames[i]] = statobj.stat(statnames[i]);
+                }
+            } else if (statobj.stat('audioOutputLevel')) {
+                ret.audioOutputLevel = statobj.stat('audioOutputLevel');
+            }
+
+            return ret;
+        };
+
+    onstats = onstats || function(stats) {};
+    if ('native' === this.apitype && this.peerconn.getStats) {
+        this.peerconn.getStats(function(stats) {
+            var statlist = stats.result(),
+                statsarr = [], ret;
+
+            for (var i=0; i&lt;statlist.length; i++) {
+                if (!statlist[i].local || statlist[i].local === statlist[i]) {
+                    statsarr.push(dumpstats(statlist[i]));
+                } else {
+                    if (statlist[i].local) {
+                        ret = dumpstats(statlist[i]);
+                        ret.local = true;
+                        statsarr.push(ret);
+                    }
+                    if (statlist.remote) {
+                        ret = dumpstats(statlist[i]);
+                        ret.remote = true;
+                        statsarr.push(ret);                    
+                    }
+                }
+            }
+
+            onstats(statsarr);
+        });
+    } else {
+        onstats([]);
+    }
+}
+
+/**
  * Get plugin logs for debugging purposes.
  * @memberof GoCastJS
  * @param {DomElement} localplayer - GoCastPlayer instance used for local video.
@@ -936,7 +1032,7 @@ GoCastJS.PluginLog = function(localplayer, logCallback, apitype) {
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Thu May 16 2013 09:54:52 GMT-0700 (PDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Mon Jun 10 2013 09:45:33 GMT-0700 (PDT)
 </footer>
 
 <script> prettyPrint(); </script>
